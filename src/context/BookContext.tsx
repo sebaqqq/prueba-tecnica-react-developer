@@ -12,7 +12,9 @@ interface Book {
 }
 
 interface BookContextType {
+  books: Book[];
   favorites: Book[];
+  addBook: (book: Book) => void;
   addFavorite: (book: Book) => void;
   removeFavorite: (id: string) => void;
 }
@@ -27,7 +29,12 @@ export const useBookContext = () => {
 };
 
 export const BookProvider: React.FC = ({ children }) => {
+  const [books, setBooks] = useState<Book[]>([]);
   const [favorites, setFavorites] = useState<Book[]>([]);
+
+  const addBook = (book: Book) => {
+    setBooks((prevBooks) => [...prevBooks, book]);
+  };
 
   const addFavorite = (book: Book) => {
     setFavorites((prevFavorites) => [...prevFavorites, book]);
@@ -40,7 +47,9 @@ export const BookProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <BookContext.Provider value={{ favorites, addFavorite, removeFavorite }}>
+    <BookContext.Provider
+      value={{ books, favorites, addBook, addFavorite, removeFavorite }}
+    >
       {children}
     </BookContext.Provider>
   );

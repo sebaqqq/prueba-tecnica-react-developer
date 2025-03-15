@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { formatDate } from "../utils/formatDate";
+import { useBookContext } from "../context/BookContext";
 
 const useBooks = () => {
-  const [books, setBooks] = useState<any[]>([]);
+  const { addBook } = useBookContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -12,18 +12,18 @@ const useBooks = () => {
         const response = await fetch("https://anapioficeandfire.com/api/books");
         const data = await response.json();
 
-        const transformedBooks = data.map((book: any) => ({
-          id: book.isbn,
-          name: book.name,
-          author: book.authors.join(", "),
-          released: formatDate(book.released),
-          publisher: book.publisher,
-          country: book.country,
-          mediaType: book.mediaType,
-          numberOfPages: book.numberOfPages,
-        }));
-
-        setBooks(transformedBooks);
+        data.forEach((book: any) => {
+          addBook({
+            id: book.isbn,
+            name: book.name,
+            author: book.authors.join(", "),
+            released: new Date(book.released).toLocaleDateString("es-ES"),
+            publisher: book.publisher,
+            country: book.country,
+            mediaType: book.mediaType,
+            numberOfPages: book.numberOfPages,
+          });
+        });
       } catch (err) {
         setError("No se pudieron cargar los libros");
       } finally {
@@ -32,9 +32,9 @@ const useBooks = () => {
     };
 
     fetchBooks();
-  }, []);
+  }, [addBook]);
 
-  return { books, loading, error };
+  return { loading, error };
 };
 
 export default useBooks;

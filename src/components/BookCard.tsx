@@ -1,5 +1,5 @@
 import React from "react";
-import { Book as BookIcon, User, Heart } from "lucide-react";
+import { Book as BookIcon, User } from "lucide-react";
 interface Book {
   id: string;
   name: string;
