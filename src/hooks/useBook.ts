@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useBookContext } from "../context/BookContext";
+import { formatDate } from "../utils/formatDate";
 
 const useBooks = () => {
-  const { addBook } = useBookContext();
+  const { addBook, books } = useBookContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -13,16 +14,18 @@ const useBooks = () => {
         const data = await response.json();
 
         data.forEach((book: any) => {
-          addBook({
-            id: book.isbn,
-            name: book.name,
-            author: book.authors.join(", "),
-            released: new Date(book.released).toLocaleDateString("es-ES"),
-            publisher: book.publisher,
-            country: book.country,
-            mediaType: book.mediaType,
-            numberOfPages: book.numberOfPages,
-          });
+          if (!bookExists(book.isbn)) {
+            addBook({
+              id: book.isbn,
+              name: book.name,
+              author: book.authors.join(", "),
+              released: formatDate(book.released),
+              publisher: book.publisher,
+              country: book.country,
+              mediaType: book.mediaType,
+              numberOfPages: book.numberOfPages,
+            });
+          }
         });
       } catch (err) {
         setError("No se pudieron cargar los libros");
@@ -32,7 +35,11 @@ const useBooks = () => {
     };
 
     fetchBooks();
-  }, [addBook]);
+  }, []);
+
+  const bookExists = (isbn: string) => {
+    return books.some((book: any) => book.id === isbn);
+  };
 
   return { loading, error };
 };

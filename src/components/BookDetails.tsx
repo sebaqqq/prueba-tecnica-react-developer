@@ -1,7 +1,7 @@
 import React from "react";
 import { useBookContext } from "../context/BookContext";
+import { Book } from "./type";
 import {
-  Book,
   User,
   Calendar,
   Building2,
@@ -10,16 +10,6 @@ import {
   FileText,
   Heart,
 } from "lucide-react";
-
-interface Book {
-  name: string;
-  author: string;
-  released: string;
-  publisher: string;
-  country: string;
-  mediaType: string;
-  numberOfPages: number;
-}
 
 const BookDetails: React.FC<{ book: Book }> = ({ book }) => {
   const { favorites, addFavorite, removeFavorite } = useBookContext();

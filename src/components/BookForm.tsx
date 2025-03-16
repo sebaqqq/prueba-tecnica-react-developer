@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
-import { Book, User, BookText, Calendar } from "lucide-react";
+import { Book, User, BookText, Calendar, CheckCircle } from "lucide-react";
 import { useBookContext } from "../context/BookContext";
 
 const BookForm: React.FC = () => {
   const { addBook } = useBookContext();
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   return (
     <div className="max-w-md mx-auto p-6 bg-gray-800 rounded-xl shadow-xl">
@@ -14,6 +15,13 @@ const BookForm: React.FC = () => {
           Agregar nuevo libro
         </h2>
       </div>
+
+      {successMessage && (
+        <div className="mb-4 p-3 bg-green-700 text-white rounded-lg flex items-center gap-2">
+          <CheckCircle className="w-5 h-5" />
+          <span>{successMessage}</span>
+        </div>
+      )}
 
       <Formik
         initialValues={{
@@ -26,13 +34,20 @@ const BookForm: React.FC = () => {
           mediaType: "",
           numberOfPages: 0,
         }}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           const newBook = {
             id: new Date().toISOString(),
             ...values,
           };
+
           addBook(newBook);
           console.log(newBook);
+
+          setSuccessMessage("¡Libro agregado correctamente!");
+
+          resetForm();
+
+          setTimeout(() => setSuccessMessage(null), 3000);
         }}
       >
         <Form className="space-y-4">

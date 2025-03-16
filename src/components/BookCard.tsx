@@ -1,16 +1,6 @@
 import React from "react";
 import { Book as BookIcon, User } from "lucide-react";
-interface Book {
-  id: string;
-  name: string;
-  author: string;
-  coverUrl?: string;
-}
-
-interface BookCardProps {
-  book: Book;
-  onClick: () => void;
-}
+import { BookCardProps } from "./type";
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
   return (
