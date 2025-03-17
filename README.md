@@ -62,13 +62,13 @@ Esto iniciará el servidor en `http://localhost:3000`.
    Si deseas ejecutar solo las pruebas de un archivo específico, usa el siguiente comando:
 
    ```bash
-   pnpm test <src/test/archivo.test.tsx>
+   pnpm test src/test/archivo.test.tsx
    ```
 
    Ejemplo:
 
    ```bash
-   pnpm test src/__tests__/Home.test.tsx
+   pnpm test src/test/Home.test.tsx
    ```
 
 ## Decisiones Técnicas y Arquitectónicas
