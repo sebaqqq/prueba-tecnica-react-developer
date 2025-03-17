@@ -92,7 +92,7 @@ const Home: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-red-400 flex items-center gap-2">
-          <span className="text-lg">{error}</span>
+          <span className="text-lg sm:text-xl md:text-2xl">{error}</span>
         </div>
       </div>
     );
@@ -101,24 +101,24 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 px-4 py-8 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-8">
+          <div className="flex items-center gap-3 mb-4 md:mb-0">
             <Library className="w-8 h-8 text-purple-500" />
             <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
               Biblioteca Digital
             </h1>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-between">
             <Link
               to="/favorites"
-              className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-purple-400 rounded-lg transition-colors duration-200"
+              className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-purple-400 rounded-lg transition-colors duration-200 w-full sm:w-auto"
             >
               <Heart className="w-5 h-5" />
               <span>Favoritos</span>
             </Link>
             <Link
               to="/add-book"
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-200"
+              className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-200 w-full sm:w-auto text-right"
             >
               <PlusCircle className="w-5 h-5" />
               <span>Añadir Libro</span>
