@@ -27,8 +27,7 @@ const BookForm: React.FC = () => {
         initialValues={{
           name: "",
           author: "",
-          genre: "",
-          published: "",
+          released: "",
           publisher: "",
           country: "",
           mediaType: "",
@@ -77,23 +76,11 @@ const BookForm: React.FC = () => {
 
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <BookText className="h-5 w-5 text-gray-400" />
-            </div>
-            <Field
-              type="text"
-              name="genre"
-              placeholder="Género"
-              className="block w-full pl-10 pr-3 py-2.5 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
-            />
-          </div>
-
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Calendar className="h-5 w-5 text-gray-400" />
             </div>
             <Field
               type="date"
-              name="published"
+              name="released"
               className="block w-full pl-10 pr-3 py-2.5 border border-gray-600 rounded-lg bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
             />
           </div>

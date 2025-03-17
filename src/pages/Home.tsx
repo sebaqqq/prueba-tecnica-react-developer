@@ -34,87 +34,15 @@ const Home: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
-    const updatedFilters = {
-      ...filters,
-      [name]: value,
-    };
-
-    setFilters(updatedFilters);
-
-    if (name === "publisher" && value.trim() === "") {
-      setFilteredBooks(books);
-    } else {
-      applyFilters();
-    }
+    setFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters, [name]: value };
+      return updatedFilters;
+    });
   };
 
-  // const applyFilters = useCallback(
-  //   (searchTerm: string = "", updatedFilters = filters) => {
-  //     let filtered = [...books];
-
-  //     const hasActiveFilters =
-  //       updatedFilters.publisher ||
-  //       updatedFilters.mediaType ||
-  //       updatedFilters.country ||
-  //       updatedFilters.pagesMin ||
-  //       updatedFilters.pagesMax ||
-  //       updatedFilters.year;
-
-  //     if (!hasActiveFilters && searchTerm.trim() === "") {
-  //       setFilteredBooks(books);
-  //       return;
-  //     }
-
-  //     if (searchTerm) {
-  //       filtered = filtered.filter(
-  //         (book) =>
-  //           book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //           book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //           book.publisher.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //           book.country.toLowerCase().includes(searchTerm.toLowerCase())
-  //       );
-  //     }
-
-  //     if (updatedFilters.publisher) {
-  //       filtered = filtered.filter((book) =>
-  //         book.publisher
-  //           .toLowerCase()
-  //           .includes(updatedFilters.publisher.toLowerCase())
-  //       );
-  //     }
-
-  //     if (updatedFilters.sortOrder === "asc") {
-  //       filtered.sort((a, b) => a.name.localeCompare(b.name));
-  //     } else {
-  //       filtered.sort((a, b) => b.name.localeCompare(a.name));
-  //     }
-
-  //     const uniqueBooks = filtered.filter(
-  //       (book, index, self) => index === self.findIndex((b) => b.id === book.id)
-  //     );
-
-  //     setFilteredBooks(uniqueBooks);
-  //   },
-  //   [books, filters]
-  // );
-
   const applyFilters = useCallback(
-    (searchTerm: string = "", updatedFilters = filters) => {
+    (searchTerm: string = "") => {
       let filtered = [...books];
-
-      const hasActiveFilters =
-        updatedFilters.publisher ||
-        updatedFilters.mediaType ||
-        updatedFilters.country ||
-        updatedFilters.pagesMin ||
-        updatedFilters.pagesMax ||
-        updatedFilters.year;
-
-      if (!hasActiveFilters && searchTerm.trim() === "") {
-        setFilteredBooks(books);
-        return;
-      }
 
       if (searchTerm) {
         filtered = filtered.filter(
@@ -126,26 +54,21 @@ const Home: React.FC = () => {
         );
       }
 
-      if (updatedFilters.publisher) {
+      if (filters.publisher) {
         filtered = filtered.filter((book) =>
-          book.publisher
-            .toLowerCase()
-            .includes(updatedFilters.publisher.toLowerCase())
+          book.publisher.toLowerCase().includes(filters.publisher.toLowerCase())
         );
       }
 
-      // Aplicar ordenación correctamente
-      filtered = filtered.slice().sort((a, b) => {
-        if (updatedFilters.sortOrder === "asc") {
-          return a.name.localeCompare(b.name);
-        } else {
-          return b.name.localeCompare(a.name);
-        }
-      });
+      filtered = [...filtered].sort((a, b) =>
+        filters.sortOrder === "asc"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name)
+      );
 
-      // Eliminar duplicados
       const uniqueBooks = filtered.filter(
-        (book, index, self) => index === self.findIndex((b) => b.id === book.id)
+        (book, index, self) =>
+          index === self.findIndex((b) => b.name === book.name)
       );
 
       setFilteredBooks(uniqueBooks);
@@ -154,8 +77,8 @@ const Home: React.FC = () => {
   );
 
   useEffect(() => {
-    applyFilters("", filters);
-  }, [filters, applyFilters]);
+    applyFilters();
+  }, [filters, books, applyFilters]);
 
   if (loading) {
     return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { useBookContext } from "../context/BookContext";
 import { Book } from "./type";
+import { formatDate } from "../utils/formatDate";
 import {
   User,
   Calendar,
@@ -58,7 +59,7 @@ const BookDetails: React.FC<{ book: Book }> = ({ book }) => {
           <DetailItem
             icon={<Calendar className="w-5 h-5" />}
             label="Publicado"
-            value={book.released}
+            value={formatDate(book.released)}
           />
           <DetailItem
             icon={<Building2 className="w-5 h-5" />}

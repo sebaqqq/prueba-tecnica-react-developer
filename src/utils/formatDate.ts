@@ -1,4 +1,14 @@
-export const formatDate = (date: string): string => {
-  const newDate = new Date(date);
-  return newDate.toLocaleDateString("es-ES");
+export const formatDate = (dateString: string): string => {
+  if (!dateString) return "";
+
+  const timestamp = Date.parse(dateString);
+  if (isNaN(timestamp)) return "Fecha inválida";
+
+  const date = new Date(timestamp);
+
+  const day = date.getUTCDate().toString().padStart(2, "0");
+  const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+  const year = date.getUTCFullYear().toString().slice(-2);
+
+  return `${day}/${month}/${year}`;
 };

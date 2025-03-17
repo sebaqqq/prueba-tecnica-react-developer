@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useBookContext } from "../context/BookContext";
-import { formatDate } from "../utils/formatDate";
 
 const useBooks = () => {
   const { addBook, books } = useBookContext();
@@ -19,7 +18,7 @@ const useBooks = () => {
               id: book.isbn,
               name: book.name,
               author: book.authors.join(", "),
-              released: formatDate(book.released),
+              released: book.released,
               publisher: book.publisher,
               country: book.country,
               mediaType: book.mediaType,
