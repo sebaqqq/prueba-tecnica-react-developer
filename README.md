@@ -45,6 +45,14 @@ pnpm run dev
 
 Esto iniciará el servidor en `http://localhost:3000`.
 
+## Ejecución del Storybook
+
+Para ejecutar la aplicación en modo desarrollo, usa el siguiente comando:
+
+```bash
+pnpm run storybook
+```
+
 ## Ejecución de las pruebas
 
 1. **Ejecutar todas las pruebas:**
