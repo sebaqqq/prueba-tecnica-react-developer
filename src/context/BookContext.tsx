@@ -10,7 +10,9 @@ export const useBookContext = () => {
   return context;
 };
 
-export const BookProvider: React.FC = ({ children }) => {
+export const BookProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [favorites, setFavorites] = useState<Book[]>([]);
 

@@ -22,6 +22,26 @@ const exampleBooks = [
     mediaType: "Libro",
     numberOfPages: 328,
   },
+  {
+    id: "3",
+    name: "Cien Años de Soledad",
+    author: "Gabriel García Márquez",
+    released: "1967-06-05",
+    publisher: "Editorial Sudamericana",
+    country: "Colombia",
+    mediaType: "Libro",
+    numberOfPages: 417,
+  },
+  {
+    id: "4",
+    name: "Matar a un Ruiseñor",
+    author: "Harper Lee",
+    released: "1960-07-11",
+    publisher: "J.B. Lippincott & Co.",
+    country: "USA",
+    mediaType: "Libro",
+    numberOfPages: 281,
+  },
 ];
 
 export default {
@@ -30,7 +50,15 @@ export default {
 };
 
 const Template = () => (
-  <BookProvider value={{ books: exampleBooks }}>
+  <BookProvider
+    value={{
+      books: exampleBooks,
+      favorites: [],
+      addBook: () => {},
+      addFavorite: () => {},
+      removeFavorite: () => {},
+    }}
+  >
     <Home />
   </BookProvider>
 );

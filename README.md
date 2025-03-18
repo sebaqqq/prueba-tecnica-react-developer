@@ -103,6 +103,8 @@ Aunque la aplicación está funcional, algunas mejoras y características que no
 
 3. **Interfaz de administración**: No se implementó una interfaz para agregar o eliminar libros de manera administrativa. Esto permitiría a los administradores gestionar la base de datos de libros más fácilmente.
 
+4. **Mejoras en el StoryBook**: Se puede implimentar mejoras con el diseño del story, ademas poder solucionar los errores presente que tiene el home.
+
 ## Qué Haría de Manera Diferente si Tuviera Más Tiempo
 
 Si tuviera más tiempo para trabajar en este proyecto, implementaría las siguientes mejoras:

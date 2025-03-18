@@ -1,4 +1,5 @@
 import BookDetails from "../components/BookDetails";
+import { BookProvider } from "../context/BookContext";
 import { Book } from "../context/type";
 
 const bookExample: Book = {
@@ -17,7 +18,11 @@ export default {
   component: BookDetails,
 };
 
-const Template = (args: { book: Book }) => <BookDetails {...args} />;
+const Template = (args: { book: Book }) => (
+  <BookProvider value={{ books: [bookExample] }}>
+    <BookDetails {...args} />
+  </BookProvider>
+);
 
 export const Default = Template.bind({});
 Default.args = {
