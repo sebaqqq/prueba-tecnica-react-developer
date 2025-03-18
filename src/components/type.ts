@@ -4,6 +4,7 @@ export interface BookCardProps {
 }
 
 export interface Book {
+  id: string;
   name: string;
   author: string;
   released: string;
