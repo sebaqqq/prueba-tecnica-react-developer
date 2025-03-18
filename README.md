@@ -26,7 +26,7 @@ Este proyecto consiste en una aplicación web para gestionar una biblioteca digi
    Si no tienes **pnpm** instalado, puedes hacerlo ejecutando:
 
    ```bash
-   npm install -g pnpm
+   npm install -g pnpm@latest-10
    ```
 
    Luego, instala las dependencias:
