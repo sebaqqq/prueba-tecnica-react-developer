@@ -69,10 +69,6 @@ pnpm run storybook
 
    Si deseas ejecutar solo las pruebas de un archivo específico, usa el siguiente comando:
 
-   ```bash
-   pnpm test
-   ```
-
    Ejemplo:
 
    ```bash
