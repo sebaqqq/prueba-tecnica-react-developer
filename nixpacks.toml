@@ -1,0 +1,11 @@
+[build]
+builder = "nixpacks"
+
+[build.env]
+NODE_ENV = "production"
+
+[build.nixpacks]
+phases.setup.nixpkgs = ["nodejs_18", "pnpm-9_x"]
+phases.install.cmds = ["pnpm install --frozen-lockfile"]
+phases.build.cmds = ["pnpm exec tsc -b", "pnpm run build"]
+phases.start.cmds = ["pnpm run start"]
