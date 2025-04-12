@@ -27,5 +27,5 @@
     /* Agregar tipos de Jest */
     "types": ["jest", "node"]
   },
-  "include": ["src"]
+  "include": ["src", ".storybook/stories"]
 }
